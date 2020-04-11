@@ -1,0 +1,346 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-163233520-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-163233520-1');
+</script>
+
+
+ 
+
+<!--<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>-->
+<!--<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>-->
+<link rel="shortcut icon" href="https://numeromatic.000webhostapp.com/myicon.ico">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Number theory calculator">
+    <meta name="keywords" content="number theory,calculator">
+    <title>Numeromatic</title>
+    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script>$(function () {
+    // Make the div with id 'mycell' a Sage cell
+    // sagecell.makeSagecell({inputLocation:  '#mycell',
+                           // template:       sagecell.templates.minimal,
+                           //evalButtonText: 'Activate'});
+    // Make *any* div with class 'compute' a Sage cell
+    sagecell.makeSagecell({inputLocation: 'div.compute',
+                           evalButtonText: 'Activate' ,
+                           hide: ['editor','permalink']});
+    });
+    </script>
+  </head>
+  <body bgcolor=E7E7EF>
+  <h1 style="text-align:center;font-family:Comic Sans MS, cursive, sans-serif">Numeromatic</h1>
+  <p style="text-align:center;font-family:Comic Sans MS, cursive, sans-serif;font-size:110%">Number theory calculator</p>
+<HR>
+<BR>
+<BR>
+	
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Digital Root</h3>
+
+<br>
+    
+    <div style="margin-left:5em;margin-right:5em;" class="compute"><script type="text/x-sage">
+gp.eval("mysumdigits(n)=sumdigits(n);")
+def Calculate(n):
+    return(LatexExpr("dr("+str(n)+")="+str(gp.function_call("mysumdigits",[n]).sage())))
+@interact
+def _(n=input_box(12,'n :',width=30),action=selector(['Calculate'],buttons=True,label='')):
+    action = eval(action) 
+    show (action(n))
+</script></div>
+	
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Divisors Of A Number</h3>
+
+<br>
+    
+    <div style="margin-left:5em;margin-right:5em;" class="compute"><script type="text/x-sage">
+gp.eval("mydivisors(n)=divisors(n);")
+def Calculate(n):
+    return(LatexExpr(str(gp.function_call("mydivisors",[n]).sage())))
+@interact
+def _(n=input_box(8,'n :',width=30),action=selector(['Calculate'],buttons=True,label='')):
+    action = eval(action) 
+    show (action(n))
+</script></div>
+	
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Number Of Divisors</h3>
+
+<br>
+    
+    <div style="margin-left:5em;margin-right:5em;" class="compute"><script type="text/x-sage">
+gp.eval("mynumdiv(n)=numdiv(n);")
+def Calculate(n):
+    return(LatexExpr("d("+str(n)+")="+str(gp.function_call("mynumdiv",[n]).sage())))
+@interact
+def _(n=input_box(8,'n :',width=30),action=selector(['Calculate'],buttons=True,label='')):
+    action = eval(action) 
+    show (action(n))
+</script></div>
+	
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Sum Of Divisors</h3>
+
+<br>
+    
+    <div style="margin-left:5em;margin-right:5em;" class="compute"><script type="text/x-sage">
+gp.eval("mysigma(n)=sigma(n);")
+def Calculate(n):
+    return(LatexExpr("\\sigma("+str(n)+")="+str(gp.function_call("mysigma",[n]).sage())))
+@interact
+def _(n=input_box(8,'n :',width=30),action=selector(['Calculate'],buttons=True,label='')):
+    action = eval(action) 
+    show (action(n))
+</script></div>
+	
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Prime Factorization</h3>
+
+<br>
+    
+    <div style="margin-left:5em;margin-right:5em;" class="compute"><script type="text/x-sage">
+gp.eval("myfactor(n)=factor(n);")
+def Calculate(n):
+    return(gp.function_call("myfactor",[n]).sage())
+@interact
+def _(n=input_box(33,'n :',width=30),action=selector(['Calculate'],buttons=True,label='')):
+    action = eval(action) 
+    show (action(n))
+</script></div>
+	
+
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Factorial </h3>
+
+<br>
+    
+    <div style="margin-left:5em;margin-right:5em;" class="compute"><script type="text/x-sage">
+gp.eval("myfactorial(n)=n!;")
+def Calculate(n):
+    return(LatexExpr(str(n)+"!="+str(gp.function_call("myfactorial",[n]).sage())))
+@interact
+def _(n=input_box(4,'n :',width=30),action=selector(['Calculate'],buttons=True,label='')):
+    action = eval(action) 
+    show (action(n))
+</script></div>
+ 
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Greatest Common Divisor</h3>
+
+<br>
+    
+    <div style="margin-left:5em;margin-right:5em;" class="compute"><script type="text/x-sage">
+gp.eval("mygcd(a,b)=gcd(a,b);")
+def Calculate(a,b):
+    return(LatexExpr("\\operatorname{gcd}("+str(a)+","+str(b)+")="+str(gp.function_call("mygcd",[a,b]).sage())))
+@interact
+def _(a=input_box(2,'a :',width=30),b=input_box(3,'b :',width=30),action=selector(['Calculate'],buttons=True,label='')):
+    action = eval(action) 
+    show (action(a,b))
+</script></div>
+
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Least Common Multiple</h3>
+
+<br>
+    
+    <div style="margin-left:5em;margin-right:5em;" class="compute"><script type="text/x-sage">
+gp.eval("mylcm(a,b)=lcm(a,b);")
+def Calculate(a,b):
+    return(LatexExpr("\\operatorname{lcm}("+str(a)+","+str(b)+")="+str(gp.function_call("mylcm",[a,b]).sage())))
+@interact
+def _(a=input_box(2,'a :',width=30),b=input_box(3,'b :',width=30),action=selector(['Calculate'],buttons=True,label='')):
+    action = eval(action) 
+    show (action(a,b))
+</script></div>
+	
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Euler's Totient Function </h3>
+
+<br>
+    
+    <div style="margin-left:5em;margin-right:5em;" class="compute"><script type="text/x-sage">
+gp.eval("myeulerphi(n)=eulerphi(n);")
+def Calculate(n):
+    return(LatexExpr("\\varphi("+str(n)+")="+str(gp.function_call("myeulerphi",[n]).sage())))
+@interact
+def _(n=input_box(8,'n :',width=30),action=selector(['Calculate'],buttons=True,label='')):
+    action = eval(action) 
+    show (action(n))
+</script></div>
+	
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Kronecker Symbol</h3>
+
+<br>
+    
+    <div style="margin-left:5em;margin-right:5em;" class="compute"><script type="text/x-sage">
+gp.eval("mykronecker(a,n)=kronecker(a,n);")
+def Calculate(a,n):
+    return(LatexExpr("\\left(\\frac{"+str(a)+"}{"+str(n)+"}\\right)="+str(gp.function_call("mykronecker",[a,n]).sage())))
+@interact
+def _(a=input_box(2,'a :',width=30),n=input_box(5,'n :',width=30),action=selector(['Calculate'],buttons=True,label='')):
+    action = eval(action) 
+    show (action(a,n))
+</script></div>
+	
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Moebius Function </h3>
+
+<br>
+    
+    <div style="margin-left:5em;margin-right:5em;" class="compute"><script type="text/x-sage">
+gp.eval("mymoebius(n)=moebius(n);")
+def Calculate(n):
+    return(LatexExpr("\\mu("+str(n)+")="+str(gp.function_call("mymoebius",[n]).sage())))
+@interact
+def _(n=input_box(5,'n :',width=30),action=selector(['Calculate'],buttons=True,label='')):
+    action = eval(action) 
+    show (action(n))
+</script></div>
+	
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">The Nth Prime Number </h3>
+
+<br>
+    
+    <div style="margin-left:5em;margin-right:5em;" class="compute"><script type="text/x-sage">
+gp.eval("myprime(n)=prime(n);")
+def Calculate(n):
+    return(LatexExpr("p_"+"{"+str(n)+"}"+"="+str(gp.function_call("myprime",[n]).sage())))
+@interact
+def _(n=input_box(5,'n :',width=30),action=selector(['Calculate'],buttons=True,label='')):
+    action = eval(action) 
+    show (action(n))
+</script></div>
+
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Next Prime Number </h3>
+
+<br>
+    
+    <div style="margin-left:5em;margin-right:5em;" class="compute"><script type="text/x-sage">
+gp.eval("mynextprimeprime(n)=nextprime(n+1);")
+def Calculate(n):
+    return(LatexExpr("p="+str(gp.function_call("mynextprimeprime",[n]).sage())))
+@interact
+def _(n=input_box(5,'n :',width=30),action=selector(['Calculate'],buttons=True,label='')):
+    action = eval(action) 
+    show (action(n))
+</script></div>
+	
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Previous Prime Number </h3>
+
+<br>
+    
+    <div style="margin-left:5em;margin-right:5em;" class="compute"><script type="text/x-sage">
+gp.eval("myprecprimeprime(n)=precprime(n-1);")
+def Calculate(n):
+    return(LatexExpr("p="+str(gp.function_call("myprecprimeprime",[n]).sage())))
+@interact
+def _(n=input_box(5,'n :',width=30),action=selector(['Calculate'],buttons=True,label='')):
+    action = eval(action) 
+    show (action(n))
+</script></div>
+	
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Prime Counting Function </h3>
+
+<br>
+    
+    <div style="margin-left:5em;margin-right:5em;" class="compute"><script type="text/x-sage">
+gp.eval("myprimepi(x)=primepi(x);")
+def Calculate(x):
+    return(LatexExpr("\\pi("+str(x)+")="+str(gp.function_call("myprimepi",[x]).sage())))
+@interact
+def _(x=input_box(8,'x :',width=30),action=selector(['Calculate'],buttons=True,label='')):
+    action = eval(action) 
+    show (action(x))
+</script></div>
+	
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">BPSW Primality Test</h3>
+
+<br>
+    
+    <div style="margin-left:5em;margin-right:5em;" class="compute"><script type="text/x-sage">
+gp.eval("myispseudoprime(n)=ispseudoprime(n);")
+def Check(n):
+    if gp.function_call("myispseudoprime",[n]).sage()==true:
+        return ("Probably prime!")
+    else:
+        return ("Composite!")
+@interact
+def _(n=input_box(3,'n :',width=30),action=selector(['Check'],buttons=True,label='')):
+    action = eval(action) 
+    show (action(n))
+</script></div>
+	
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Miller-Rabin Primality Test</h3>
+
+<br>
+    
+    <div style="margin-left:5em;margin-right:5em;" class="compute"><script type="text/x-sage">
+gp.eval("myispseudoprime(n,c)=ispseudoprime(n,c);")
+def Check(n,c):
+    if gp.function_call("myispseudoprime",[n,c]).sage()==true:
+        return ("Probably prime!")
+    else:
+        return ("Composite!")
+@interact
+def _(n=input_box(3,'n :',width=30),c=input_box(3,'Certainty :',width=30),action=selector(['Check'],buttons=True,label='')):
+    action = eval(action) 
+    show (action(n,c))
+</script></div>
+	
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Pocklington-Lehmer Primality Test</h3>
+
+<br>
+    
+    <div style="margin-left:5em;margin-right:5em;" class="compute"><script type="text/x-sage">
+gp.eval("myisprime(n)=isprime(n,1);")
+def Check(n):
+    if gp.function_call("myisprime",[n]).sage()==true:
+        return ("Prime!")
+    else:
+        return ("Composite!")
+@interact
+def _(n=input_box(3,'n :',width=30),action=selector(['Check'],buttons=True,label='')):
+    action = eval(action) 
+    show (action(n))
+</script></div>
+	
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">APRCL Primality Test</h3>
+
+<br>
+    
+    <div style="margin-left:5em;margin-right:5em;" class="compute"><script type="text/x-sage">
+gp.eval("myisprime(n)=isprime(n,2);")
+def Check(n):
+    if gp.function_call("myisprime",[n]).sage()==true:
+        return ("Prime!")
+    else:
+        return ("Composite!")
+@interact
+def _(n=input_box(3,'n :',width=30),action=selector(['Check'],buttons=True,label='')):
+    action = eval(action) 
+    show (action(n))
+</script></div>
+	
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Elliptic Curve Primality Test</h3>
+
+<br>
+    
+    <div style="margin-left:5em;margin-right:5em;" class="compute"><script type="text/x-sage">
+gp.eval("myisprime(n)=isprime(n,3);")
+def Check(n):
+    if gp.function_call("myisprime",[n]).sage()==true:
+        return ("Prime!")
+    else:
+        return ("Composite!")
+@interact
+def _(n=input_box(3,'n :',width=30),action=selector(['Check'],buttons=True,label='')):
+    action = eval(action) 
+    show (action(n))
+</script></div>
+
+
+<br><br><br><br><br><br><br>
+<p style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif" >Page by Pedja Terzic &lt; firstname.lastname[at]hotmail.com &gt;</p>
+  </body>
+</html>
