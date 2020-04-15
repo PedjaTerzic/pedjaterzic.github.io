@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="Theorems and conjectures about prime numbers">
     <meta name="keywords" content="prime,number,theorems,conjectures">
-    <title>Primus</title>
+    <title>Theorems & Conjectures</title>
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
     <script>$(function () {
     // Make the div with id 'mycell' a Sage cell
@@ -466,38 +466,70 @@ def _(b=input_box(2,'b :',width=15),n=input_box(2,'n :',width=15),action=selecto
     show (action(b,n))
 </script></div>
 
+
 <h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Conjecture 8</h3>
 
 <p style="text-align:left;margin-left:5em;margin-right:5em;">Let \( P_m(x)=2^{-m}\cdot \left(\left(x-\sqrt{x^2-4}\right)^{m}+\left(x+\sqrt{x^2-4}\right)^{m}\right)\)</p>
-<p style="text-align:left;margin-left:5em;margin-right:5em;">Let \( M= k \cdot b^{n}-1 \) where \( k\) is positive natural number , \( k<2^n\) , \( b\) is a positive natural number greater</p>
-<p style="text-align:left;margin-left:5em;margin-right:5em;">than one and \( n\ge3\) . Let \( a\) be a natural number greater than two such that \( \left(\frac{a-2}{M}\right)=1\) and \( \left(\frac{a+2}{M}\right)=-1\)</p>
-<p style="text-align:left;margin-left:5em;margin-right:5em;">where \( \left(\frac{}{}\right)\) denotes Jacobi symbol. Let \( S_i=P_b(S_{i-1})\) with \( S_0\) equal to the modular \( P_{kb^2/2}(a)\phantom{5} \text{mod} \phantom{5} M\). Then</p>
-<p style="text-align:left;margin-left:5em;margin-right:5em;">\( M\) is prime if and only if \( S_{n-2} \equiv -2 \pmod{M}\) .</p>
+<p style="text-align:left;margin-left:5em;margin-right:5em;">Let $N= 2kp^{n} - 1 $ where $k$ is a positive natural number , $ 2k<2^n$ , $p$ is a prime number and $n\ge3$ .</p>
+<p style="text-align:left;margin-left:5em;margin-right:5em;">Let $a$ be a natural number greater than two such that $\left(\frac{a-2}{N}\right)=1$ and $\left(\frac{a+2}{N}\right)=-1$ where $\left(\frac{}{}\right)$ denotes Jacobi symbol.</p>
+<p style="text-align:left;margin-left:5em;margin-right:5em;">Let $S_i=P_p(S_{i-1})$ with $S_0$ equal to the modular $P_{kp^2}(a)\phantom{5} \text{mod} \phantom{5} N$. Then $N$ is prime if and only if $S_{n-2} \equiv -2 \pmod{N}$ .</p>
 
 <br><br>
  <div style="margin-left:5em;margin-right:5em;" class="compute"><script type="text/x-sage">
-gp.eval("test(k,b,n)={M=k*b^n-1;a=3;while(!(kronecker(a-2,M)==1 && kronecker(a+2,M)==-1),a++);s=Mod(2*polchebyshev(k*b^2/2,1,a/2),M);ctr=1;while(ctr<=n-2,s=Mod(2*polchebyshev(b,1,s/2),M);ctr+=1);if(s==M-2,return(true),return(false))}")
-def Check(k,b,n):
+from sympy import *
+gp.eval("test(k,p,n)={N=2*k*p^n-1;a=3;while(!(kronecker(a-2,N)==1 && kronecker(a+2,N)==-1),a++);S=Mod(2*polchebyshev(k*p^2,1,a/2),N);ctr=1;while(ctr<=n-2,S=Mod(2*polchebyshev(p,1,S/2),N);ctr+=1);if(S==N-2,return(true),return(false))}")
+def Check(k,p,n):
     if k<=0:
         return(LatexExpr("\\text{k must be greater than zero!}"))
     elif n<3:
         return(LatexExpr("\\text{n must be greater than two!}"))
-    elif k>=2**n:
-        return(LatexExpr("\\text{k must be less than 2^n !}"))
-    elif b<2:
-        return(LatexExpr("\\text{b must be greater than one!}"))
+    elif 2*k>=2**n:
+        return(LatexExpr("\\text{2k must be less than 2^n !}"))
+    elif not(isprime(p)):
+        return(LatexExpr("\\text{p must be prime number!}"))
     else:
-        if gp.function_call("test",[k,b,n]).sage()==true:
-            return(LatexExpr(str(k)+"\\cdot"+str(b)+"^"+str({n})+"\\text{-1 is prime!}"))
+        if gp.function_call("test",[k,p,n]).sage()==true:
+            return(LatexExpr(str(2*k)+"\\cdot"+str(p)+"^"+str({n})+"\\text{-1 is prime!}"))
         else:
-            return(LatexExpr(str(k)+"\\cdot"+str(b)+"^"+str({n})+"\\text{-1 is composite!}"))
+            return(LatexExpr(str(2*k)+"\\cdot"+str(p)+"^"+str({n})+"\\text{-1 is composite!}"))
 @interact
-def _(k=input_box(1,'k :',width=20),b=input_box(2,'b :',width=20),n=input_box(3,'n :',width=20),action=selector(['Check'],buttons=True,label='')):
+def _(k=input_box(3,'k :',width=20),p=input_box(5,'p :',width=20),n=input_box(5,'n :',width=20),action=selector(['Check'],buttons=True,label='')):
     action = eval(action) 
-    show(action(k,b,n))
+    show(action(k,p,n))
+</script></div>
+	
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Conjecture 9</h3>
+
+<p style="text-align:left;margin-left:5em;margin-right:5em;">Let \( P_m(x)=2^{-m}\cdot \left(\left(x-\sqrt{x^2-4}\right)^{m}+\left(x+\sqrt{x^2-4}\right)^{m}\right)\)</p>
+<p style="text-align:left;margin-left:5em;margin-right:5em;">Let $N= 2kp^{n} + 1 $ where $k$ is a positive natural number , $ 2k<2^n$ , $p$ is a prime number and $n\ge3$ .</p>
+<p style="text-align:left;margin-left:5em;margin-right:5em;">Let $a$ be a natural number greater than two such that $\left(\frac{a-2}{N}\right)=-1$ and $\left(\frac{a+2}{N}\right)=-1$ where $\left(\frac{}{}\right)$ denotes Jacobi symbol.</p>
+<p style="text-align:left;margin-left:5em;margin-right:5em;">Let $S_i=P_p(S_{i-1})$ with $S_0$ equal to the modular $P_{kp^2}(a)\phantom{5} \text{mod} \phantom{5} N$. Then $N$ is prime if and only if $S_{n-2} \equiv -2 \pmod{N}$ .</p>
+
+<br><br>
+ <div style="margin-left:5em;margin-right:5em;" class="compute"><script type="text/x-sage">
+from sympy import *
+gp.eval("test(k,p,n)={N=2*k*p^n+1;a=3;while(!(kronecker(a-2,N)==-1 && kronecker(a+2,N)==-1),a++);S=Mod(2*polchebyshev(k*p^2,1,a/2),N);ctr=1;while(ctr<=n-2,S=Mod(2*polchebyshev(p,1,S/2),N);ctr+=1);if(S==N-2,return(true),return(false))}")
+def Check(k,p,n):
+    if k<=0:
+        return(LatexExpr("\\text{k must be greater than zero!}"))
+    elif n<3:
+        return(LatexExpr("\\text{n must be greater than two!}"))
+    elif 2*k>=2**n:
+        return(LatexExpr("\\text{2k must be less than 2^n !}"))
+    elif not(isprime(p)):
+        return(LatexExpr("\\text{p must be prime number!}"))
+    else:
+        if gp.function_call("test",[k,p,n]).sage()==true:
+            return(LatexExpr(str(2*k)+"\\cdot"+str(p)+"^"+str({n})+"\\text{+1 is prime!}"))
+        else:
+            return(LatexExpr(str(2*k)+"\\cdot"+str(p)+"^"+str({n})+"\\text{+1 is composite!}"))
+@interact
+def _(k=input_box(3,'k :',width=20),p=input_box(5,'p :',width=20),n=input_box(3,'n :',width=20),action=selector(['Check'],buttons=True,label='')):
+    action = eval(action) 
+    show(action(k,p,n))
 </script></div>
 
-<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Conjecture 9</h3>
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Conjecture 10</h3>
 
 <p style="text-align:left;margin-left:5em;margin-right:5em;">Let \( P_m(x)=2^{-m}\cdot \left(\left(x-\sqrt{x^2-4}\right)^{m}+\left(x+\sqrt{x^2-4}\right)^{m}\right)\)</p>
 <p style="text-align:left;margin-left:5em;margin-right:5em;">Let \( M_p(a)= \frac{a^p-1}{a-1} \) where \( a\) is a natural number greater than one and \( p\) is an odd prime number . Let \( c\) be</p>
@@ -524,7 +556,7 @@ def _(a=input_box(2,'a :',width=15),p=input_box(3,'p :',width=15),action=selecto
     show (action(a,p))
 </script></div>
 
-<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Conjecture 10</h3>
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Conjecture 11</h3>
 
 <p style="text-align:left;margin-left:5em;margin-right:5em;">Let \( P_m(x)=2^{-m}\cdot \left(\left(x-\sqrt{x^2-4}\right)^{m}+\left(x+\sqrt{x^2-4}\right)^{m}\right)\)</p>
 <p style="text-align:left;margin-left:5em;margin-right:5em;">Let \( N_p(b)= \frac{b^p+1}{b+1} \) where \( b\) is a natural number greater than one and \( p\) is an odd prime number . Let \( c\) be</p>
@@ -551,7 +583,7 @@ def _(b=input_box(2,'b :',width=15),p=input_box(5,'p :',width=15),action=selecto
     show (action(b,p))
 </script></div>
 
-<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Conjecture 11</h3>
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Conjecture 12</h3>
 
 <p style="text-align:left;margin-left:5em;margin-right:5em;">Let \( P_m(x)=2^{-m}\cdot \left(\left(x-\sqrt{x^2-4}\right)^{m}+\left(x+\sqrt{x^2-4}\right)^{m}\right)\)</p>
 <p style="text-align:left;margin-left:5em;margin-right:5em;">Let \( M= k \cdot b^{n}-c \) where \( k,b,n,c\) are natural numbers such that \( k>0\) , \( b>1\) , \( n>1\) and \( c>0\). Let \( a\) be a</p>
@@ -582,7 +614,7 @@ def _(k=input_box(1,'k :',width=20),b=input_box(2,'b :',width=20),n=input_box(3,
     show(action(k,b,n,c))
 </script></div>
 
-<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Conjecture 12</h3>
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Conjecture 13</h3>
 
 <p style="text-align:left;margin-left:5em;margin-right:5em;">Let \( P_m(x)=2^{-m}\cdot \left(\left(x-\sqrt{x^2-4}\right)^{m}+\left(x+\sqrt{x^2-4}\right)^{m}\right)\)</p>
 <p style="text-align:left;margin-left:5em;margin-right:5em;">Let \( N= k \cdot b^{n}+c \) where \( k,b,n,c\) are natural numbers such that \( k>0\) , \( b>1\) , \( n>1\) and \( c>0\) . Let \( a\) be a</p>
@@ -615,7 +647,7 @@ def _(k=input_box(1,'k :',width=20),b=input_box(2,'b :',width=20),n=input_box(4,
 
 <br><br>
 
-<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Conjecture 13</h3>
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Conjecture 14</h3>
 
 <p style="text-align:left;margin-left:5em;margin-right:5em;">Let $b_n=b_{n-1}+\operatorname{lcm}(\lfloor \sqrt{2} \cdot n \rfloor , b_{n-1})$ with $b_1=2$ and $n>1$ . Let $a_n=b_{n+1}/b_n-1$ .</p>
 
@@ -642,7 +674,7 @@ def _(n=input_box(40,'n :',width=15),action=selector(['Generate'],buttons=True,l
 </script></div>
 
 <br><br>
-<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Conjecture 14</h3>
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Conjecture 15</h3>
 
 <p style="text-align:left;margin-left:5em;margin-right:5em;">Let $b_n=b_{n-1}+\operatorname{lcm}(\lfloor \sqrt{3} \cdot n \rfloor , b_{n-1})$ with $b_1=3$ and $n>1$ . Let $a_n=b_{n+1}/b_n-1$ .</p>
 
@@ -669,7 +701,7 @@ def _(n=input_box(40,'n :',width=15),action=selector(['Generate'],buttons=True,l
 </script></div>
 
 <br><br>
-<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Conjecture 15</h3>
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Conjecture 16</h3>
 
 <p style="text-align:left;margin-left:5em;margin-right:5em;">Let $b_n=b_{n-1}+\operatorname{lcm}(\lfloor \sqrt{n^3} \rfloor , b_{n-1})$ with $b_1=2$ and $n>1$ . Let $a_n=b_{n+1}/b_n-1$ .</p>
 
@@ -696,7 +728,7 @@ def _(n=input_box(40,'n :',width=15),action=selector(['Generate'],buttons=True,l
 </script></div>
 
 <br><br>
-<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Conjecture 16</h3>
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Conjecture 17</h3>
 
 <p style="text-align:left;margin-left:5em;margin-right:5em;">Let $a$ , $b$ and $n$ be a natural numbers , $b>a>1$ , $n>2$ and $n \not\in \{4,9,25\}$ .</p> 
 <p style="text-align:left;margin-left:5em;margin-right:5em;">Then $n$ is prime iff $\displaystyle \prod_{k=1}^{n-1} \left(b^k-a\right) \equiv \frac{a^n-1}{a-1} \pmod{\frac{b^n-1}{b-1}}$</p>
@@ -724,7 +756,7 @@ def _(n=input_box(3,'n:',width=10),b=input_box(3,'b:',width=10),a=input_box(2,'a
 </script></div>
 
 <br><br>
-<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Conjecture 17</h3>
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Conjecture 18</h3>
 
 <p style="text-align:left;margin-left:5em;margin-right:5em;">Let $a$ , $b$ and $n$ be a natural numbers , $b>a>0$ , $n>2$ and $n \not\in \{4,9,25\}$ .</p> 
 <p style="text-align:left;margin-left:5em;margin-right:5em;">Then $n$ is prime iff $\displaystyle \prod_{k=1}^{n-1} \left(b^k+a\right) \equiv \frac{a^n+1}{a+1} \pmod{\frac{b^n-1}{b-1}}$</p>
