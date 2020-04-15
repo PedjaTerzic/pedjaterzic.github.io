@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="Prime number checker">
     <meta name="keywords" content="prime,number,checker,probable,primality,test">
-    <title>Primotron</title>
+    <title>Prime Number Checker</title>
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
     <script>$(function () {
     // Make the div with id 'mycell' a Sage cell
@@ -42,7 +42,7 @@
 </ul>
 
 <br>
-<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;">Probabilistic Test</h3>
+<p style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;font-size:110%">Probabilistic Test</p>
     
     <div class="compute"><script type="text/x-sage">
 gp.eval("xmat(n,b,a) = {[2*a, b; 1, 0]*Mod(1,n)}")
@@ -64,7 +64,7 @@ def _(n=input_box(2011,'Number:',width=135),k=slider(1,100,1,default=3,label='Ac
 </script></div>
 	
 <br>
-<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;">Conjectured Deterministic Test</h3>
+<p style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;font-size:110%">Conjectured Deterministic Test</p>
     
     <div class="compute"><script type="text/x-sage">
 gp.eval("xmat(r,n) = [2*x, -1; 1, 0]*Mod(1,x^r-1)*Mod(1,n);")
