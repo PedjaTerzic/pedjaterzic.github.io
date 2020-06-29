@@ -92,6 +92,34 @@ def _(n=input_box(8,'n :',width=30),action=selector(['Calculate'],buttons=True,l
     show (action(n))
 </script></div>
 	
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Random Natural Number</h3>
+
+<br>
+    
+    <div style="margin-left:5em;margin-right:5em;" class="compute"><script type="text/x-sage">
+gp.eval("myrandom(n)=1+random(n);")
+def Calculate(n):
+    return(LatexExpr("\\random("+str(n)+")="+str(gp.function_call("myrandom",[n]).sage())))
+@interact
+def _(n=input_box(6,'n :',width=30),action=selector(['Calculate'],buttons=True,label='')):
+    action = eval(action) 
+    show (action(n))
+</script></div>
+	
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Random Prime Number</h3>
+
+<br>
+    
+    <div style="margin-left:5em;margin-right:5em;" class="compute"><script type="text/x-sage">
+gp.eval("myrandomprime(n)=randomprime(n+1);")
+def Calculate(n):
+    return(LatexExpr("\\randomprime("+str(n)+")="+str(gp.function_call("myrandomprime",[n]).sage())))
+@interact
+def _(n=input_box(6,'n :',width=30),action=selector(['Calculate'],buttons=True,label='')):
+    action = eval(action) 
+    show (action(n))
+</script></div>
+	
 <h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Prime Factorization</h3>
 
 <br>
