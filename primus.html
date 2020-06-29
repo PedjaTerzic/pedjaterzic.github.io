@@ -965,6 +965,39 @@ def _(k=input_box(1,'k:',width=20),n=input_box(4,'n:',width=20),action=selector(
     show(action(n,k))
 
 </script></div>
+	
+<h3 style="text-align:left;font-family:Comic Sans MS, cursive, sans-serif;margin-left:4em;">Conjecture 21</h3>
+
+<p style="text-align:left;margin-left:5em;margin-right:5em;">Let $p=t \cdot q^k+1$ be prime , with $q$ a prime and $\operatorname{gcd}(q,t)=1$ . </p> 
+<p style="text-align:left;margin-left:5em;margin-right:5em;">Let $\Phi_m(x)$ be a cyclotomic polynomial, and let $a$ be an integer that is nonzero modulo $p$. </p> 
+<p style="text-align:left;margin-left:5em;margin-right:5em;">Exactly one of the following holds:</p>
+<p style="text-align:left;margin-left:5em;margin-right:5em;">(i) $a^t \equiv 1 \pmod{p} $</p>
+<p style="text-align:left;margin-left:5em;margin-right:5em;">(ii) $\Phi_q\left(a^{(p-1)/q^i}\right) \equiv 0 \pmod{p}$ , for some $ 0 < i \le k$</p> 
+
+
+<br><br>
+<div style="margin-left:5em;margin-right:5em;" class="compute"><script type="text/x-sage">    
+gp.eval("polymod(a,p,q,k)={for(i=1,k,s=sum(k=0,q-1,lift(Mod(a,p)^(k*(p-1)/(q^i))));if(Mod(s,p)==0,return(1);break));return(0);}")
+gp.eval("witness(p)={a=0;while(a%p==0,a=2+random(p-3));return(a);}")
+gp.eval("test(t,q,k)={p=t*q^k+1;a=witness(p);if(p%2==1,if(lift(Mod(a,p)^t)==1 || polymod(a,p,q,k),return(1),return(0)),return(0));}")
+def Check(t,q,k):
+    if t*q^k+1==2 or t*q^k+1==3:
+        return(LatexExpr(str(t)+"\\cdot "+str(q)+"^"+str({k})+"\\text{+1 is probably prime!}"))
+    elif not(is_prime(q)):
+        return(LatexExpr("\\text{q must be a prime number!}"))
+    elif not(gcd(t,q)==1):
+        return(LatexExpr("\\text{t and q must be coprime!}"))
+    else:
+        if gp.function_call("test",[t,q,k]).sage()==1:
+            return(LatexExpr(str(t)+"\\cdot "+str(q)+"^"+str({k})+"\\text{+1 is probably prime!}"))
+        else:
+            return(LatexExpr(str(t)+"\\cdot "+str(q)+"^"+str({k})+"\\text{+1 is composite!}"))
+@interact
+def _(t=input_box(1,'t:',width=20),q=input_box(2,'q:',width=20),k=input_box(2,'k:',width=20),action=selector(['Check'],buttons=True,label='')):
+    action = eval(action) 
+    show(action(t,q,k))
+
+</script></div>
 
 
 <br><br><br><br><br><br><br>
