@@ -518,11 +518,11 @@ gp.eval("smallestr(n)={if(n==1 || n%2==0, return(0));forprime(r = 3, oo,my(u=n%r
 gp.eval("myisprime(n)={my(r = smallestr(n));if (r == 0, return(n == 2));my(xp = xmat(r,n)^n*[x,1]~);xp[2] == Mod(x*Mod(1,n),x^r-1)^n;}")
 def Check(n):
     if n<2:
-        return ("n must be greater than one!")
+        return (LatexExpr("\\text{n must be greater than one!}"))
     elif gp.function_call("myisprime",[n]).sage()==true:
-        return ("Prime!")
+        return (LatexExpr("\\text{Prime!}"))
     else:
-        return ("Composite!")
+        return (LatexExpr("\\text{Composite!}"))
 @interact
 def _(n=input_box(2017,'n :',width=115),action=selector(['Check'],buttons=True,label='')):
     action = eval(action) 
