@@ -398,15 +398,15 @@ gp.eval("rec(m,P)={s0=0;s1=1;s2=P-1;l=3;while(l<=m,s=P*s2-(2*P-1)*s1+P*s0;s0=s1;
 gp.eval("myispseudoprime(n,P)={Q=-(2*P-1);R=P;D=P^2*Q^2-18*P*Q*R+4*Q^3-4*P^3*R-27*R^2;d=n-kronecker(D,n);if(Mod(rec(d,P),n)==0,return(1),return(0))}")
 def Check(n,P):
     if n<3:
-        return ("n must be greater than two!")
+        return (LatexExpr("\\text{n must be greater than two!}"))
     elif P<2:
-        return ("P must be greater than one!")
+        return (LatexExpr("\\text{P must be greater than one!}"))
     elif not(gcd(n,P)==1):
-        return ("n and P must be coprime!")
+        return (LatexExpr("\\text{n and P must be coprime!}"))
     elif gp.function_call("myispseudoprime",[n,P]).sage()==true:
-        return ("Probably prime!")
+        return (LatexExpr("\\text{Probably prime!}"))
     else:
-        return ("Composite!")
+        return (LatexExpr("\\text{Composite!}"))
 @interact
 def _(n=input_box(1973,'n:',width=20),P=input_box(2,'P:',width=10),action=selector(['Check'],buttons=True,label='')):
     action = eval(action) 
